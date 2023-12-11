@@ -1,0 +1,3 @@
+include README.md
+include rectpy-apexcharts/bundle.js
+include LICENSE

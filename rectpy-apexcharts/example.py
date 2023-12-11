@@ -1,0 +1,22 @@
+from pathlib import Path
+
+from reactpy.web.module import export, module_from_file
+
+
+_js_module = module_from_file(
+    "rectpy-apexcharts",
+    file=Path(__file__).parent / "bundle.js",
+    fallback="⏳",
+)
+
+_ExampleCounter = export(_js_module, "ExampleCounter")
+
+
+def ExampleCounter(on_count_change, button_text, button_id):
+    return _ExampleCounter(
+        {
+            "onCountChange": on_count_change,
+            "buttonText": button_text,
+            "buttonId": button_id,
+        }
+    )
