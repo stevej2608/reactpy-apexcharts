@@ -5,7 +5,7 @@ import replace from "rollup-plugin-replace";
 export default {
   input: "src/index.js",
   output: {
-    file: "../rectpy-apexcharts/bundle.js",
+    file: "../rectpy_apexcharts/bundle.js",
     format: "esm",
   },
   plugins: [

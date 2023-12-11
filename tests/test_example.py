@@ -1,9 +1,10 @@
 import reactpy
+import pytest
 from reactpy.testing import poll
 
-from rectpy-apexcharts.example import ExampleCounter
+from rectpy_apexcharts.example import ExampleCounter
 
-
+@pytest.mark.anyio
 async def test_example_counter(display):
     count = reactpy.Ref(0)
 

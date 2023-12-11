@@ -1,8 +1,23 @@
+[tool.poetry]
+name = "reactpy-apexcharts"
+version = "0.1.0"
+description = ""
+authors = ["Steve Jones <jonesst2608@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+twine = "^4.0.2"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.23.2"
+reactpy = {extras = ["starlette", "testing"], version = "^1.0.2"}
+
+
+[tool.poetry.group.dev.dependencies]
+pytest-asyncio = "^0.23.2"
+asyncio = "^3.4.3"
+trio = "^0.23.1"
+
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
-
-[tool.pytest.ini_options]
-testpaths = "tests"
-asyncio_mode = "auto"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

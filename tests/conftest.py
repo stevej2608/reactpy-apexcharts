@@ -3,6 +3,10 @@ from playwright.async_api import async_playwright
 from reactpy.testing import DisplayFixture, BackendFixture
 
 
+@pytest.fixture(scope="session")
+def anyio_backend():
+    return 'asyncio'
+
 def pytest_addoption(parser) -> None:
     parser.addoption(
         "--headed",
