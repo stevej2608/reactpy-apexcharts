@@ -32,10 +32,6 @@ export default {
       replace({
          preventAssignment: false,
          'process.env.NODE_ENV': '"development"'
-      }),
-      // excludeDependenciesFromBundle({
-      //   dependencies: true,
-      //   dependencies: true
-      // })
+      })
    ]
 }
