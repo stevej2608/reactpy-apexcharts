@@ -1,4 +1,4 @@
-from typing import Literal, Union, List, Dict, Any
+from typing import Literal, Union, List, Dict, Any, Optional
 from pathlib import Path
 
 from reactpy.web.module import export, module_from_file
@@ -17,10 +17,10 @@ _RactpyApexCharts = export(_js_module, "RactpyApexCharts")
 
 def ApexChart(
         chart_type:ChartType,
-        width: Union[str,int],
-        height: Union[str,int],
         series: List[float],
-        options: Dict[str, Any]
+        options: Dict[str, Any],
+        width: Optional[Union[str,int]] = None,
+        height: Optional[Union[str,int]] = None,
         ):
     """ Wrapper for react-apexcharts library. For API and examples see:
 
@@ -37,11 +37,16 @@ def ApexChart(
         _type_: _description_
     """
 
-    return _RactpyApexCharts({
+    _args = {
         "type": chart_type,
-        "width": width,
-        "height": height,
         "series": series,
-        "options": options,
-        }
-    )
+        "options": options,        
+    }
+
+    if width:
+        _args['width'] = width
+
+    if height:
+        _args['height'] = height
+
+    return _RactpyApexCharts(_args)

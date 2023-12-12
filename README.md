@@ -1,8 +1,9 @@
 ## reactpy-apexcharts
 
-![](docs/img/showcase.png)
+<p align="center"><img src="https://apexcharts.com/media/apexcharts-banner.png"></p>
 
- [ReactPy](https://reactpy.dev/docs/index.html) wrapper for the [react-apexcharts](https://github.com/apexcharts/react-apexcharts) library
+
+ Minimal [ReactPy](https://reactpy.dev/docs/index.html) wrapper for the [react-apexcharts](https://github.com/apexcharts/react-apexcharts) library
 
 ## Usage
 
@@ -127,3 +128,9 @@ if __name__ == "__main__":
     log.setLevel(logging.INFO)
     run(AppMain)
 ```
+
+
+## Publish 
+
+    poetry build
+    poetry publish -r pypicloud
