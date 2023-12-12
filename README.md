@@ -1,61 +1,129 @@
-# reactpy-apexcharts
+## reactpy-apexcharts
 
-reactpy wrapper for apexcharts
+![](docs/img/showcase.png)
 
-# Installation
+ [ReactPy](https://reactpy.dev/docs/index.html) wrapper for the [react-apexcharts](https://github.com/apexcharts/react-apexcharts) library
 
-Use `pip` to install this package:
+## Usage
 
-```bash
-pip install rectpy-apexcharts
+    pip install reactpy-apexcharts
+
+## Documentation
+
+Configuration options can be found [here](https://apexcharts.com/docs/react-charts/)
+
+### Simple Barchart Example
+
+![](./docs/img/barchart-example.png)
+
+*./examples/chart_example.py*
+```
+from reactpy import component, html, run
+from rectpy_apexcharts.chart import ApexChart
+
+@component
+def AppMain():
+
+    return html.div(
+
+        ApexChart(
+            options = {
+                'chart': {'id': 'apex-chart-example'},
+                'xaxis': {
+                'categories': [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]}
+            },
+
+            series = [{
+                'name': 'series-1',
+                'data': [30, 40, 35, 50, 49, 60, 70, 91, 125]
+            }],
+
+            chart_type = "bar",
+            width=500,
+            height=320
+        )
+    )
+
+# python -m examples.chart_example
+
+if __name__ == "__main__":
+    run(AppMain)
 ```
 
-For a developer installation from source be sure to install [NPM](https://www.npmjs.com/) before running:
+### More complex area chart
 
-```bash
-git clone https://github.com/stevej2608/reactpy-apexcharts
-cd reactpy-apexcharts
-pip install -e . -r requirements.txt
+[sales.py](./sales.py), is a more complex example showing how to control color, grids and
+format X & Y axis labels.
+
+![](./docs/img/sales.png)
+
+*./examples/sales_example.py*
 ```
+from reactpy import component, html, run
+from utils.logger import log, logging
+from rectpy_apexcharts.chart import ApexChart
 
-# Running the Tests
+SALES_CHART = {
+    "chart": {
+        "fontFamily": "Inter, sans-serif",
+        "foreColor": "#6B7280",
+        "toolbar": {"show": False},
+    },
+    "fill": {
+        "type": "solid",
+        "opacity": 0.3,
+    },
+    "dataLabels": {"enabled": False},
+    "tooltip": {
+        "style": {
+            "fontSize": "14px",
+            "fontFamily": "Inter, sans-serif",
+        },
+    },
+    "grid": {
+        "show": False,
+    },
+    "xaxis": {
+        "categories": ["01 Feb", "02 Feb", "03 Feb", "04 Feb", "05 Feb", "06 Feb", "07 Feb"],
+        "labels": {
+            "style": {
+                "colors": ["#6B7280"],
+                "fontSize": "14px",
+                "fontWeight": 500,
+            },
+        },
+        "axisBorder": {
+            "color": "#F3F4F6",
+        },
+        "axisTicks": {
+            "color": "#F3F4F6",
+        },
+    },
+    "yaxis": {
+        "labels": {
+            "style": {
+                "colors": ["#6B7280"],
+                "fontSize": "14px",
+                "fontWeight": 500,
+            },
+            'formatter': "${value}"
+        },
+    },
+    "responsive": [{"breakpoint": 1024, "options": {"xaxis": {"labels": {"show": False}}}}],
+}
 
-To run the tests you'll need to install [Chrome](https://www.google.com/chrome/). Then you
-can download the [ChromeDriver](https://chromedriver.chromium.org/downloads) and add it to
-your `PATH`. Once that's done, simply `pip` install the requirements:
+@component
+def AppMain():
 
-```bash
-pip install -r requirements.txt
+    series = {"name": "Revenue", "data": [6356, 6218, 6156, 6526, 6356, 6256, 6056], "color": "#0694a2"}
+
+    return html.div(
+        ApexChart(options=SALES_CHART, series=[series], chart_type='area', height=400, width=1000)
+    )
+
+# python -m examples.sales_example
+
+if __name__ == "__main__":
+    log.setLevel(logging.INFO)
+    run(AppMain)
 ```
-
-And run the tests with `pytest`:
-
-```bash
-pytest tests
-```
-
-You can run the tests in headless mode (i.e. without opening the browser):
-
-```bash
-pytest tests
-```
-
-You'll need to run in headless mode to execute the suite in continuous integration systems
-like GitHub Actions.
-
-# Releasing This Package
-
-To release a new version of rectpy-apexcharts on PyPI:
-
-1. Install [`twine`](https://twine.readthedocs.io/en/latest/) with `pip install twine`
-2. Update the `version = "x.y.z"` variable in `rectpy-apexcharts/__init__.py`
-3. `git` add the changes to `__init__.py` and create a `git tag -a x.y.z -m 'comment'`
-4. Build the Python package with `python setup.py sdist bdist_wheel`
-5. Check the build artifacts `twine check --strict dist/*`
-6. Upload the build artifacts to [PyPI](https://pypi.org/) `twine upload dist/*`
-
-To release a new version of `rectpy-apexcharts` on [NPM](https://www.npmjs.com/):
-
-1. Update `js/package.json` with new npm package version
-2. Clean out prior builds `git clean -fdx`
-3. Install and publish `npm install && npm publish`

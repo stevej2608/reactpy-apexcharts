@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import htm from "htm";
 
 import Chart from 'react-apexcharts'
+
+const html = htm.bind(React.createElement);
 
 export function bind(node, config) {
   return {

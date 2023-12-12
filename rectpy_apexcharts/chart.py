@@ -8,7 +8,7 @@ ChartType = Literal['line', 'area', 'bar', 'pie', 'donut', 'scatter', 'bubble', 
 
 _js_module = module_from_file(
     "rectpy-apexcharts",
-    file=Path(__file__).parent / "bundle.js",
+    file=Path(__file__).parent / "bundle.min.js",
     fallback="⏳",
 )
 

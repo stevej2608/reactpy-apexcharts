@@ -30,6 +30,7 @@
     "rollup-plugin-replace": "^2.2.0"
   },
   "dependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "htm": "^3.0.4",
     "react": "^17.0.1",
     "react-apexcharts": "^1.4.1",
