@@ -17,7 +17,7 @@ Configuration options can be found [here](https://apexcharts.com/docs/react-char
 
 ![](./docs/img/barchart-example.png)
 
-*./examples/chart_example.py*
+*./examples/barchart_example.py*
 ```
 from reactpy import component, html, run
 from rectpy_apexcharts.chart import ApexChart
