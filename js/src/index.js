@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import htm from "htm";
 
-const html = htm.bind(React.createElement);
+import Chart from 'react-apexcharts'
 
 export function bind(node, config) {
   return {
@@ -12,19 +11,57 @@ export function bind(node, config) {
   }
 }
 
-export function ExampleCounter(props) {
-  const [count, setCount] = React.useState(0);
-
-  const updateCount = () => {
-    const newCount = count + 1;
-    props.onCountChange(newCount);
-    setCount(newCount);
-  };
-
-  return html`<div>
-    <button id=${props.buttonId} onClick=${updateCount}>
-      ${props.buttonText}
-    </button>
-    <p>current count is: ${count}</p>
-  </div>`;
+function isString(x) {
+  return Object.prototype.toString.call(x) === "[object String]"
 }
+
+// https://stackoverflow.com/a/57565813
+
+const interpolate = (str, obj) => str.replace(
+  /{([^}]+)}/g,
+  (_, prop) => obj[prop]
+);
+
+/**
+ * Wrapper for react-apexcharts library. For API and
+ * examples see:
+ *
+ * https://github.com/apexcharts/react-apexcharts
+ *
+
+ */
+
+export function RactpyApexCharts(props) {
+
+    // const { id, setProps, loading_state, children, ...chartProps } = props;
+
+    console.log(JSON.stringify(props, null,2));
+
+    // Any X and Y axis formatters are simple strings of the form:
+    //
+    //    "{value} m/s"
+
+    try {
+      const xfmt = props.options.xaxis.labels.formatter
+      if (xfmt){
+        props.options.xaxis.labels.formatter = function(value){
+          return interpolate(xfmt, { value })
+        }
+      }
+    } catch (e) {
+    }
+
+    try {
+      const xfmt = props.options.yaxis.labels.formatter
+      if (xfmt){
+        props.options.yaxis.labels.formatter = function(value){
+          return interpolate(xfmt, { value })
+        }
+      }
+    } catch (e) {
+    }
+
+  return (
+    <Chart {...props} />
+    );
+  }

@@ -1,6 +1,6 @@
 from reactpy import component, html, run
 from utils.logger import log, logging
-from rectpy_apexcharts.chart import Chart
+from rectpy_apexcharts.chart import ApexChart
 
 @component
 def AppMain():
@@ -8,7 +8,7 @@ def AppMain():
 
     return html.div(
 
-        Chart(
+        ApexChart(
             options = {
                 'chart': {'id': 'apex-chart-example'},
                 'xaxis': {
