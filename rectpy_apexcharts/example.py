@@ -12,11 +12,12 @@ _js_module = module_from_file(
 _ExampleCounter = export(_js_module, "ExampleCounter")
 
 
-def ExampleCounter(on_count_change, button_text, button_id):
+def ExampleCounter(on_count_change, button_text, button_id, count=0):
     return _ExampleCounter(
         {
             "onCountChange": on_count_change,
             "buttonText": button_text,
             "buttonId": button_id,
+            "count": count,
         }
     )
