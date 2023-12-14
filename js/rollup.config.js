@@ -10,11 +10,11 @@ export default {
    input: 'src/index.js',
    output: [
       {
-      file: "../rectpy_apexcharts/bundle.js",
+      file: "../reactpy_apexcharts/bundle.js",
       format: "esm",
       },
 		{
-			file: '../rectpy_apexcharts/bundle.min.js',
+			file: '../reactpy_apexcharts/bundle.min.js',
 			format: 'esm',
 			plugins: [terser()]
 		}

@@ -132,5 +132,5 @@ if __name__ == "__main__":
 
 ## Publish 
 
-    poetry build
+    rm -rf dist && poetry build
     poetry publish -r pypicloud

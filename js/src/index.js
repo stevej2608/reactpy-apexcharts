@@ -36,9 +36,7 @@ const interpolate = (str, obj) => str.replace(
 
 export function RactpyApexCharts(props) {
 
-    // const { id, setProps, loading_state, children, ...chartProps } = props;
-
-    console.log(JSON.stringify(props, null,2));
+    // console.log(JSON.stringify(props, null,2));
 
     // Any X and Y axis formatters are simple strings of the form:
     //
