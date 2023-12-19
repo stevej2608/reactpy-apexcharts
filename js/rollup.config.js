@@ -10,15 +10,26 @@ export default {
    input: 'src/index.js',
    output: [
       {
-      file: "../reactpy_apexcharts/bundle.js",
-      format: "esm",
+         file: "../reactpy_apexcharts/bundle.dev.js",
+         sourcemap: 'inline',
+         format: "esm",
       },
 		{
 			file: '../reactpy_apexcharts/bundle.min.js',
 			format: 'esm',
-			plugins: [terser()]
-		}
+			plugins: [terser({mangle: false})]
+		},
+  
    ],
+
+   // https://www.mixmax.com/engineering/rollup-externals
+
+   // external: ['react', 'react-dom'],
+   // globals: {
+   //   'react': 'React',
+   //   'react-dom': 'ReactDOM'
+   // },
+
    plugins: [
       nodeResolve({
          extensions: ['.js', '.jsx']

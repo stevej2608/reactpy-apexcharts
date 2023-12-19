@@ -1,8 +1,8 @@
 from reactpy import component, html
 from utils.logger import log, logging
-from reactpy_apexcharts.chart import ApexChart
-
 from utils.fast_server import run
+from reactpy_apexcharts import ApexChart
+
 
 # https://apexcharts.com/docs/react-charts/
 
