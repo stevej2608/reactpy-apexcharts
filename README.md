@@ -15,7 +15,7 @@ Configuration options can be found [here](https://apexcharts.com/docs/react-char
 
 ### Simple Barchart Example
 
-![](./docs/img/barchart-example.png)
+![](https://raw.githubusercontent.com/stevej2608/reactpy-apexchart/master/docs/img/barchart-example.png)
 
 *./examples/barchart_example.py*
 ```
@@ -56,7 +56,7 @@ if __name__ == "__main__":
 [syncing_chart.py](examples/syncing_chart.py), is a more complex example showing how to control color, grids and
 format X & Y axis labels.
 
-![](docs/img/syncing_charts.png)
+![](https://raw.githubusercontent.com/stevej2608/reactpy-apexchart/master/docs/img/syncing_charts.png)
 
 *./examples/syncing_chart.py*
 ```
