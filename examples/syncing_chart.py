@@ -22,7 +22,6 @@ def time_series(date: dt, count: int, yrange: dict) -> List[Tuple[int, float]]:
 
     return series
 
-
 options = {
     "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 60})}],
     "chart": {"id": "fb", "group": "social", "type": "line", "height": 160},
@@ -44,29 +43,19 @@ optionsArea = {
     "colors": ["#00E396"]
 }
 
-optionsSmall = {
-    "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 60})}],
-    "chart": {"id": "ig","group": "social","type": "area","height": 160,"width": 300},
-    "colors": ["#008FFB"]
-}
 
-optionsSmall2 = {
-    "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 60})}],
-    "chart": {"id": "ig","group": "social","type": "area","height": 160,"width": 300},
-    "colors": ["#546E7A"]
-}
-
+@component
+def CustomChart(options):
+    return  html.div({'style': {'min-height': '175px'}},
+        ApexChart(options=options),
+    )
 
 @component
 def AppMain():
     return html.div(
-        html.div({'style': {'min-height': '175px'}},
-            ApexChart(options=options),
-            ),
-        ApexChart(options=optionsLine2),
-        ApexChart(options=optionsArea),
-        # ApexChart(options=optionsSmall),
-        # ApexChart(options=optionsSmall2)
+        CustomChart(options=options),
+        CustomChart(options=optionsLine2),
+        CustomChart(options=optionsArea),
     )
 
 

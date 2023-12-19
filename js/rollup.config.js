@@ -12,6 +12,7 @@ export default {
       {
          file: "../reactpy_apexcharts/bundle.dev.js",
          sourcemap: 'inline',
+         plugins: [terser({mangle: false})],
          format: "esm",
       },
 		{

@@ -128,9 +128,3 @@ if __name__ == "__main__":
     log.setLevel(logging.INFO)
     run(AppMain)
 ```
-
-
-## Publish 
-
-    rm -rf dist && poetry build
-    poetry publish -r pypicloud

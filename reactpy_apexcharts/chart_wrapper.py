@@ -28,17 +28,17 @@ def ApexChart(
         https://github.com/apexcharts/react-apexcharts
 
     Args:
-        chart_type (ChartType): _description_
-        width (Union[str,int]): _description_
-        height (Union[str,int]): _description_
-        series (List[float]): _description_
-        options (Dict[str, Any]): _description_
+        chart_type (ChartType): The chart type
+        width (Union[str,int]): The chart width
+        height (Union[str,int]): the chart height
+        series (List[float]): Series to be displayed
+        options (Dict[str, Any]): Options
 
     Returns:
         _type_: _description_
     """
 
-    def unpack_option(option_name:str, value, options = {}):
+    def unpack_option(option_name:str, value, options):
         if not value:
             if option_name in options:
                 value = options[option_name]
@@ -50,8 +50,9 @@ def ApexChart(
                     value = None
         return value
 
-
     _args: Dict[str, Any] = {}
+
+    # Args can be passed in directly or embedded in the options
 
     _args['type'] = unpack_option('type', chart_type, options)
     _args['width'] = unpack_option('width', width, options)
@@ -61,8 +62,12 @@ def ApexChart(
     if options:
         _args['options'] = options
 
+    # Must have a chart type
+
     if _args['type'] is None:
         raise ValueError('Chart "type" is not defined')
+
+    # Must have height or width or both
 
     if _args['width'] is None and _args['height'] is None:
         raise ValueError('Chart "width" or "height" or both must be defined')
