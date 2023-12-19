@@ -1,10 +1,12 @@
 [tool.poetry]
 name = "reactpy-apexcharts"
-version = "0.0.6"
+version = "0.0.7"
 description = ""
 authors = ["Steve Jones <jonesst2608@gmail.com>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/stevej2608/reactpy-apexchart"
+repository = "https://github.com/stevej2608/reactpy-apexchart"
 
 
 [tool.poetry.dependencies]
