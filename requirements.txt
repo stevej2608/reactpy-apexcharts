@@ -1,4 +1,0 @@
-twine
-pytest
-pytest-asyncio
-reactpy[testing,starlette]
