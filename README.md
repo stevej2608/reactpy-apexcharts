@@ -20,7 +20,7 @@ Configuration options can be found [here](https://apexcharts.com/docs/react-char
 *./examples/barchart_example.py*
 ```
 from reactpy import component, html, run
-from rectpy_apexcharts.chart import ApexChart
+from reactpy_apexcharts import ApexChart
 
 @component
 def AppMain():
@@ -53,78 +53,57 @@ if __name__ == "__main__":
 
 ### More complex area chart
 
-[sales.py](./sales.py), is a more complex example showing how to control color, grids and
+[syncing_chart.py](examples/syncing_chart.py), is a more complex example showing how to control color, grids and
 format X & Y axis labels.
 
-![](./docs/img/sales.png)
+![](docs/img/syncing_charts.png)
 
-*./examples/sales_example.py*
+*./examples/syncing_chart.py*
 ```
 from reactpy import component, html, run
-from utils.logger import log, logging
-from rectpy_apexcharts.chart import ApexChart
+from reactpy_apexcharts import ApexChart
 
-SALES_CHART = {
-    "chart": {
-        "fontFamily": "Inter, sans-serif",
-        "foreColor": "#6B7280",
-        "toolbar": {"show": False},
-    },
-    "fill": {
-        "type": "solid",
-        "opacity": 0.3,
-    },
-    "dataLabels": {"enabled": False},
-    "tooltip": {
-        "style": {
-            "fontSize": "14px",
-            "fontFamily": "Inter, sans-serif",
-        },
-    },
-    "grid": {
-        "show": False,
-    },
-    "xaxis": {
-        "categories": ["01 Feb", "02 Feb", "03 Feb", "04 Feb", "05 Feb", "06 Feb", "07 Feb"],
-        "labels": {
-            "style": {
-                "colors": ["#6B7280"],
-                "fontSize": "14px",
-                "fontWeight": 500,
-            },
-        },
-        "axisBorder": {
-            "color": "#F3F4F6",
-        },
-        "axisTicks": {
-            "color": "#F3F4F6",
-        },
-    },
-    "yaxis": {
-        "labels": {
-            "style": {
-                "colors": ["#6B7280"],
-                "fontSize": "14px",
-                "fontWeight": 500,
-            },
-            'formatter': "${value}"
-        },
-    },
-    "responsive": [{"breakpoint": 1024, "options": {"xaxis": {"labels": {"show": False}}}}],
+DATE = dt(2017, 2, 11)
+
+options = {
+    "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 60})}],
+    "chart": {"id": "fb", "group": "social", "type": "line", "height": 160},
+    "xaxis": {'type': 'datetime'},
+    "colors": ["#008FFB"],
 }
+
+optionsLine2 = {
+    "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 30})}],
+    "chart": {"id": "tw", "group": "social", "type": "line", "height": 160},
+    "xaxis": {'type': 'datetime'},
+    "colors": ["#546E7A"],
+}
+
+optionsArea = {
+    "series": [{"data": time_series(DATE, 20, {"min": 10, "max": 60})}],
+    "chart": {"id": "yt","group": "social","type": "area","height": 160},
+    "xaxis": {'type': 'datetime'},
+    "colors": ["#00E396"]
+}
+
+
+@component
+def CustomChart(options):
+    return  html.div({'style': {'min-height': '175px'}},
+        ApexChart(options=options),
+    )
 
 @component
 def AppMain():
-
-    series = {"name": "Revenue", "data": [6356, 6218, 6156, 6526, 6356, 6256, 6056], "color": "#0694a2"}
-
     return html.div(
-        ApexChart(options=SALES_CHART, series=[series], chart_type='area', height=400, width=1000)
+        CustomChart(options=options),
+        CustomChart(options=optionsLine2),
+        CustomChart(options=optionsArea),
     )
 
-# python -m examples.sales_example
+
+# python -m examples.syncing_chart
 
 if __name__ == "__main__":
-    log.setLevel(logging.INFO)
     run(AppMain)
 ```
