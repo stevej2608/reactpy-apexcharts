@@ -29,7 +29,7 @@ source code is in **./js/src/*.js**
 
 *Then:*
 
-    pytest [--headed]
+    pytest [--headed] [--update-snapshots]
 
 ## Publish 
 

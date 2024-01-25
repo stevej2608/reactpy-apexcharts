@@ -52,6 +52,27 @@
     },
 
     {
+      "name": "2a. PyTest (test_sales_example.py)",
+      "type": "python",
+      "request": "launch",
+      "stopOnEntry": false,
+      "module": "pytest",
+      "args": [
+        "--headed",
+        "--update-snapshots",
+        "tests/test_sales_example.py"
+      ],
+      "cwd": "${workspaceRoot}",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "justMyCode": false
+    },
+
+
+
+    {
       "name": "3 Launch Chrome",
       "request": "launch",
       "type": "chrome",
