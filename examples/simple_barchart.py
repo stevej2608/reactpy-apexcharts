@@ -7,7 +7,7 @@ from reactpy_apexcharts import ApexChart
 # https://apexcharts.com/docs/react-charts/
 
 @component
-def BatChart():
+def BarChart():
     return html.div(
         ApexChart(
             chart_type="bar",
@@ -29,7 +29,7 @@ def BatChart():
 
 @component
 def AppMain():
-    return html.div({"class_name": "container grid"}, html.section(BatChart()))
+    return html.div({"class_name": "container grid"}, html.section(BarChart()))
 
 
 # python -m examples.simple_barchart
