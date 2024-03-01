@@ -2,5 +2,9 @@
     "cSpell.words": [
         "pytest",
         "runserver"
+    ],
+    "python.analysis.typeCheckingMode": "standard",
+    "python.analysis.exclude": [
+        "tmp"
     ]
 }

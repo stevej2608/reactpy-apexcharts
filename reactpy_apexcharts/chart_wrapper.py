@@ -16,9 +16,12 @@ _js_module = module_from_file(
 _RactpyApexCharts = export(_js_module, "RactpyApexCharts")
 
 
+Series = List[Dict[str, Any]]
+
+
 def ApexChart(
         chart_type: Optional[ChartType] = None,
-        series: Optional[List[float]] = None,
+        series: Optional[Series] = None,
         width: Optional[Union[str,int]] = None,
         height: Optional[Union[str,int]] = None,
         options: Optional[Dict[str, Any]] = None
@@ -31,7 +34,7 @@ def ApexChart(
         chart_type (ChartType): The chart type
         width (Union[str,int]): The chart width
         height (Union[str,int]): the chart height
-        series (List[float]): Series to be displayed
+        series (List[float]): Series to be displayed, see https://apexcharts.com/docs/options/series/
         options (Dict[str, Any]): Options
 
     Returns:
