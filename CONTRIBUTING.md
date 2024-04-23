@@ -17,7 +17,7 @@ started with the env variable **REACTPY_DEBUG_MODE** set prior to
 running the application:
 
     export REACTPY_DEBUG_MODE=1 
-    python -m examples.single
+    python -m examples.sales_example
 
 Select the launch configuration **3. Launch Chrome**. You will
 now be able to set breakpoints from withing VSCODE. The javascript
