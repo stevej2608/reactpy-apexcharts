@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "reactpy-apexcharts"
-version = "0.0.10"
+version = "0.0.11"
 description = ""
 authors = ["Steve Jones <jonesst2608@gmail.com>"]
 readme = "README.md"
