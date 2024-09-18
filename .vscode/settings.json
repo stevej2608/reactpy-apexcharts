@@ -5,6 +5,7 @@
     ],
     "python.analysis.typeCheckingMode": "standard",
     "python.analysis.exclude": [
-        "tmp"
+        "tmp",
+        ".venv"
     ]
 }

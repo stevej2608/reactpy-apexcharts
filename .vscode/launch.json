@@ -5,8 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch Program (test.js)",
+      "program": "${workspaceFolder}/tmp/test.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    },
+    {
       "name": "1a examples/barchart_example.py",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "examples.simple_barchart",
       "justMyCode": false,
@@ -22,12 +31,13 @@
 
     {
       "name": "1b examples/sales_example.py",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "examples.sales_example",
       "justMyCode": false,
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
+      "env": {"REACTPY_DEBUG_MODE": "1"},
       "serverReadyAction": {
         "pattern": "Uvicorn running on\\s+(https?://\\S+)",
         "uriFormat": "%s/",
@@ -37,7 +47,7 @@
     },
     {
       "name": "1c examples/syncing_chart.py",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "examples.syncing_chart",
       "justMyCode": false,
@@ -53,7 +63,7 @@
 
     {
       "name": "2a. PyTest (test_sales_example.py)",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "stopOnEntry": false,
       "module": "pytest",

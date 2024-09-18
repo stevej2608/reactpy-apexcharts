@@ -6,6 +6,23 @@ import Chart from 'react-apexcharts'
 
 const html = htm.bind(React.createElement);
 
+
+function format_wrapper(fmtString) {
+
+  const fmtFunc = new Function('value', fmtString );
+
+  const _wrapper = (value) => {
+    try {
+      return fmtFunc(value)
+    } catch (e) {
+      console.log('Failed to format "%s"', value)
+      return value
+    }
+  }
+
+  return _wrapper;
+}
+
 export function bind(node, config) {
   return {
     create: (type, props, children) => React.createElement(type, props, ...children),
@@ -13,26 +30,6 @@ export function bind(node, config) {
     unmount: () => ReactDOM.unmountComponentAtNode(node),
   }
 }
-
-function isString(x) {
-  return Object.prototype.toString.call(x) === "[object String]"
-}
-
-// https://stackoverflow.com/a/57565813
-
-const interpolate = (str, obj) => str.replace(
-  /{([^}]+)}/g,
-  (_, prop) => obj[prop]
-);
-
-/**
- * Wrapper for react-apexcharts library. For API and
- * examples see:
- *
- * https://github.com/apexcharts/react-apexcharts
- *
-
- */
 
 export function RactpyApexCharts(props) {
 
@@ -42,25 +39,25 @@ export function RactpyApexCharts(props) {
     //
     //    "{value} m/s"
 
-    try {
-      const xfmt = props.options.xaxis.labels.formatter
-      if (xfmt){
-        props.options.xaxis.labels.formatter = function(value){
-          return interpolate(xfmt, { value })
-        }
-      }
-    } catch (e) {
+  try {
+    const xFormatter  = props.options.xaxis.labels.formatter
+    if (xFormatter ) {
+      const formatter = format_wrapper(xFormatter )
+      props.options.xaxis.labels.formatter = formatter
     }
+  } catch (e) {
+    console.log("XAxis formatter error %s", e)
+  }
 
-    try {
-      const xfmt = props.options.yaxis.labels.formatter
-      if (xfmt){
-        props.options.yaxis.labels.formatter = function(value){
-          return interpolate(xfmt, { value })
-        }
-      }
-    } catch (e) {
+  try {
+    const yFormatter = props.options.yaxis.labels.formatter
+    if (yFormatter) {
+      const formatter = format_wrapper(yFormatter)
+      props.options.yaxis.labels.formatter = formatter
     }
+  } catch (e) {
+    console.log("YAxis formatter error %s", e)
+  }
 
   return (
     <Chart {...props} />

@@ -55,7 +55,7 @@ SALES_CHART = {
                 "fontSize": "14px",
                 "fontWeight": 500,
             },
-            "formatter": "${value}",
+            "formatter": "return '$' + value",
         },
     },
     "responsive": [
