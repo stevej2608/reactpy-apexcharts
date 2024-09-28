@@ -40,7 +40,7 @@ export function RactpyApexCharts(props) {
     //    "{value} m/s"
 
   try {
-    const xFormatter  = props.options.xaxis.labels.formatter
+    const xFormatter  = props?.options?.xaxis?.labels?.formatter
     if (xFormatter ) {
       const formatter = format_wrapper(xFormatter )
       props.options.xaxis.labels.formatter = formatter
@@ -50,7 +50,7 @@ export function RactpyApexCharts(props) {
   }
 
   try {
-    const yFormatter = props.options.yaxis.labels.formatter
+    const yFormatter = props?.options?.yaxis?.labels?.formatter
     if (yFormatter) {
       const formatter = format_wrapper(yFormatter)
       props.options.yaxis.labels.formatter = formatter

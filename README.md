@@ -3,7 +3,8 @@
 <p align="center"><img src="https://apexcharts.com/media/apexcharts-banner.png"></p>
 
 
- Minimal [ReactPy](https://reactpy.dev/docs/index.html) wrapper for the [react-apexcharts](https://github.com/apexcharts/react-apexcharts) library
+ Minimal [ReactPy](https://reactpy.dev/docs/index.html) wrapper for 
+ the [react-apexcharts](https://github.com/apexcharts/react-apexcharts) library (v 1.4.1).
 
 ## Usage
 
