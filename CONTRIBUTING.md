@@ -1,10 +1,6 @@
 ## Building
 
-    poetry install --no-root
-
-    cd js
-    npm install
-    npm run build
+    hatch build --clean
 
 ### Debugging
 
@@ -29,13 +25,14 @@ source code is in **./js/src/*.js**
 
 *Then:*
 
-    pytest [--headed] [--update-snapshots]
+    hatch test [--headed]
 
 ## Publish 
 
-    rm -rf dist && poetry build
-    poetry publish
+    hatch build --clean
+    hatch publish
 
 Or publish to local repo
 
-    poetry publish -r pypicloud
+    hatch build --clean
+    hatch publish -r pypicloud
