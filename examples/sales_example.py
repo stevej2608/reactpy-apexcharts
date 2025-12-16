@@ -1,6 +1,8 @@
-from reactpy import component, html, run
+from reactpy import component, html
 from utils.logger import log, logging
 from reactpy_apexcharts import ApexChart
+
+from examples.runner import run
 
 # https://demo.themesberg.com/windster/
 

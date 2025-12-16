@@ -1,9 +1,11 @@
 from typing import List, Tuple
 from datetime import datetime as dt
 import random
-from reactpy import component, html, run
+from reactpy import component, html
 from utils.logger import log, logging
 from reactpy_apexcharts import ApexChart
+
+from examples.runner import run
 
 DATE = dt(2017, 2, 11)
 
