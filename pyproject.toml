@@ -1,45 +1,118 @@
-[tool.poetry]
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+##############################
+# >>> Hatch Build Config <<< #
+##############################
+
+[project]
 name = "reactpy-apexcharts"
-version = "0.0.12"
-description = ""
-authors = ["Steve Jones <jonesst2608@gmail.com>"]
+description = "ApexCharts components for ReactPy"
 readme = "README.md"
+keywords = ["React", "ReactJS", "ReactPy", "ApexCharts", "charts", "components"]
 license = "MIT"
-homepage = "https://github.com/stevej2608/reactpy-apexcharts"
-repository = "https://github.com/stevej2608/reactpy-apexcharts"
+authors = [{ name = "Steve Jones", email = "jonesst2608@gmail.com" }]
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Widget Sets",
+  "Topic :: Software Development :: User Interfaces",
+  "Environment :: Web Environment",
+  "Typing :: Typed",
+]
+dependencies = ["reactpy==1.1.0"]
+dynamic = ["version"]
+urls.Homepage = "https://github.com/stevej2608/reactpy-apexcharts"
+urls.Source = "https://github.com/stevej2608/reactpy-apexcharts"
 
+[tool.hatch.version]
+path = "reactpy_apexcharts/__init__.py"
 
-[tool.poetry.dependencies]
-python = ">=3.9,<4.0.0"
-reactpy = "^1.0.2"
+[tool.hatch.build.targets.sdist]
+include = ["/reactpy_apexcharts", "/tests", "/examples", "/README.md", "/LICENSE"]
 
-[tool.poetry.group.dev.dependencies]
+[tool.hatch.build.targets.wheel]
+packages = ["reactpy_apexcharts"]
 
-pytest-timeout = "2.2.0"
-fastapi = "^0.109.0"
-playwright = "1.41.1"
-pytest = "^7.4.4"
-pytest-asyncio = "^0.23.3"
-starlette = ">=0.13.6"
-trio = "^0.24.0"
-twine = "^4.0.2"
-uvicorn = {extras = ["standard"], version = ">=0.19.0"}
-pillow = "^10.2.0"
-pixelmatch = "^0.3.0"
+[tool.hatch.metadata]
+license-files = { paths = ["LICENSE"] }
+
+[tool.hatch.envs.default]
+installer = "uv"
+
+#############################
+# >>> Hatch Test Runner <<< #
+#############################
+
+[tool.hatch.envs.hatch-test]
+extra-dependencies = [
+  "pytest-timeout==2.2.0",
+  "pytest-asyncio>=0.23.3",
+  "fastapi>=0.109.0",
+  "playwright==1.41.1",
+  "starlette>=0.13.6",
+  "trio>=0.24.0",
+  "uvicorn[standard]>=0.19.0,<0.36.0",
+  "pillow>=10.2.0",
+  "pixelmatch>=0.3.0",
+]
+randomize = true
+matrix-name-format = "{variable}-{value}"
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12"]
 
 [tool.pytest.ini_options]
 testpaths = "tests"
 log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
+addopts = """\
+    --strict-config
+    --strict-markers
+    """
 
-# -r Show extra test summary info as specified by chars: 
-#   (s)kipped, 
-#   (x)failed, 
-#   (X)passed, 
+# -r Show extra test summary info as specified by chars:
+#   (s)kipped,
+#   (x)failed,
+#   (X)passed,
 # addopts = "-rsxX"
 
 # asyncio_mode = "auto"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+#########################
+# >>> Generic Tools <<< #
+#########################
+
+[tool.ruff]
+extend-exclude = [".venv/*", ".eggs/*", "build/*", "dist/*"]
+line-length = 120
+format.preview = true
+lint.extend-ignore = [
+  "ARG001",  # Unused function argument
+  "ARG002",  # Unused method argument
+  "ARG004",  # Unused static method argument
+  "FBT001",  # Boolean-typed positional argument in function definition
+  "FBT002",  # Boolean default positional argument in function definition
+  "PLR2004", # Magic value used in comparison
+  "SIM115",  # Use context handler for opening files
+  "SLF001",  # Private member accessed
+]
+lint.preview = true
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["reactpy_apexcharts/"]
+
+[tool.coverage.paths]
+source = ["reactpy_apexcharts/"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "...", "raise NotImplementedError"]
