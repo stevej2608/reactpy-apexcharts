@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 from datetime import datetime as dt
 import random
 from reactpy import component, html
@@ -11,7 +11,7 @@ DATE = dt(2017, 2, 11)
 
 # https://apexcharts.com/javascript-chart-demos/line-charts/syncing-charts/
 
-def time_series(date: dt, count: int, yrange: dict) -> List[Tuple[int, float]]:
+def time_series(date: dt, count: int, yrange: Dict[str, int]) -> List[Tuple[int, float]]:
     baseval: float = date.timestamp() * 1000
     series: List[Tuple[int, float]] = []
     i = 0
@@ -47,7 +47,7 @@ optionsArea = {
 
 
 @component
-def CustomChart(options):
+def CustomChart(options: Dict[str, Any]):
     return  html.div({'style': {'min-height': '175px'}},
         ApexChart(options=options),
     )

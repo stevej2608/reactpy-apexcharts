@@ -6,16 +6,16 @@ making it easy to run simple examples without manual server setup.
 """
 
 import sys
-from typing import Any, List, Optional
+from typing import Any, List, Optional, cast
 
 import uvicorn
 from reactpy import component, html
-from reactpy.types import ComponentType, VdomDict
+from reactpy.types import ComponentConstructor, VdomDict, VdomChild
 from reactpy.executors.asgi import ReactPy
 
 
 def run(
-    app_main: ComponentType,
+    app_main: ComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
     title: str = "ReactPy App",
@@ -54,13 +54,15 @@ def run(
         head = html.head(html.title(title))
     elif "children" in head:
         # Add title to existing head if not present
+        children = cast(List[VdomChild], head.get("children", []))  # type: ignore[reportUnknownMemberType]
         has_title = any(
-            child.get("tagName") == "title"
-            for child in head.get("children", [])
-            if isinstance(child, dict)
-        )
+            isinstance(child, dict) and child.get("tagName") == "title"  # type: ignore[reportUnknownMemberType]
+            for child in children
+        )  # type: ignore[reportUnknownArgumentType]
         if not has_title:
-            head["children"].insert(0, html.title(title))
+            # Cast to list to ensure we can insert
+            children_list = cast(List[VdomChild], head["children"])
+            children_list.insert(0, html.title(title))
     else:
         head["children"] = [html.title(title)]
 
@@ -83,7 +85,7 @@ def run(
 
 
 def pico_run(
-    app: ComponentType,
+    app: ComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
     title: str = "ReactPy Table",

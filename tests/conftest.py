@@ -1,6 +1,8 @@
 import pytest
+from typing import AsyncGenerator
 from _pytest.config import Config
 from _pytest.config.argparsing import Parser
+from playwright.async_api import Browser, Page
 
 from reactpy.testing import DisplayFixture, BackendFixture
 from reactpy.testing.common import GITHUB_ACTIONS
@@ -30,30 +32,24 @@ def pytest_addoption(parser: Parser) -> None:
     )
 
 @pytest.fixture
-async def display(server, page):
+async def display(server: BackendFixture, page: Page) -> AsyncGenerator[DisplayFixture, None]:
     async with DisplayFixture(server, page) as display:
         yield display
 
 @pytest.fixture
-async def server():
+async def server() -> AsyncGenerator[BackendFixture, None]:
     async with BackendFixture() as server:
         yield server
 
 
 @pytest.fixture
-async def page(browser):
+async def page(browser: Browser) -> AsyncGenerator[Page, None]:
     pg = await browser.new_page()
     pg.set_default_timeout(REACTPY_TESTS_DEFAULT_TIMEOUT.current * 1000)
     try:
         yield pg
     finally:
         await pg.close()
-
-# @pytest.fixture(scope="session")
-# async def page(pytestconfig):
-#     async with async_playwright() as pw:
-#         yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))
-
 
 @pytest.fixture
 async def browser(pytestconfig: Config):

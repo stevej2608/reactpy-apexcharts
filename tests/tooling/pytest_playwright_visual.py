@@ -11,11 +11,11 @@ from pixelmatch.contrib.PIL import pixelmatch
 # https://github.com/symon-storozhenko/pytest-playwright-visual/tree/main
 
 @pytest.fixture
-def assert_snapshot(pytestconfig: Any, request: Any, browser_name: str = "unknown") -> Callable:
+def assert_snapshot(pytestconfig: Any, request: Any, browser_name: str = "unknown") -> Callable[..., None]:
     test_name = f"{str(Path(request.node.name))}[{str(sys.platform)}]"
     test_dir = str(Path(request.node.name)).split('[', 1)[0]
 
-    def compare(img: bytes, *, threshold: float = 0.1, name=f'{test_name}.png', fail_fast=False) -> None:
+    def compare(img: bytes, *, threshold: float = 0.1, name: str = f'{test_name}.png', fail_fast: bool = False) -> None:
         update_snapshot = pytestconfig.getoption("--update-snapshots")
         test_file_name = str(os.path.basename(Path(request.node.fspath))).strip('.py')
         filepath = (

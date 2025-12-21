@@ -59,11 +59,12 @@ artifacts = []
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "pytest-sugar",
-  "pytest-asyncio",
-  "responses",
   "exceptiongroup",
   "jsonpointer",
+  "pyright",
+  "pytest-asyncio",
+  "pytest-sugar",
+  "responses",
   "starlette",
 ]
 randomize = true
@@ -109,3 +110,5 @@ line-length = 120
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
 typeCheckingMode = "strict"
 pythonVersion = "3.11"
+reportMissingTypeStubs = false
+ignore = ["tmp", "tmp/**", "**/tmp/**"]

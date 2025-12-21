@@ -40,17 +40,17 @@ def ApexChart(
         _type_: _description_
     """
 
-    def unpack_option(option_name:str, value, options):
+    def unpack_option(option_name: str, value: Any, options: Optional[Dict[str, Any]]) -> Any:
         if not value:
-            if option_name in options:
-                value = options[option_name]
-            else:
-                chart = options['chart'] if 'chart' in options else {}
-                if option_name in chart:
-                    value = chart[option_name]
+            if options and option_name in options:
+                value = options[option_name]  # type: ignore[reportUnknownVariableType]
+            elif options:
+                chart = options.get('chart', {})
+                if isinstance(chart, dict) and option_name in chart:
+                    value = chart[option_name]  # type: ignore[reportUnknownVariableType]
                 else:
                     value = None
-        return value
+        return value  # type: ignore[reportUnknownVariableType]
 
     _args: Dict[str, Any] = {}
 
