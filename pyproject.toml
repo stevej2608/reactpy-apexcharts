@@ -2,13 +2,6 @@
 build-backend = "hatchling.build"
 requires = ["hatchling", "hatch-build-scripts"]
 
-[[tool.hatch.build.hooks.build-scripts.scripts]]
-commands = [
-  "bun install --cwd src/js",
-  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm --no-minify",
-]
-artifacts = []
-
 ##############################
 # >>> Hatch Build Config <<< #
 ##############################
@@ -53,6 +46,13 @@ license-files = { paths = ["LICENSE"] }
 [tool.hatch.envs.default]
 installer = "uv"
 
+[[tool.hatch.build.hooks.build-scripts.scripts]]
+commands = [
+  "bun install --cwd src/js",
+  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm --no-minify",
+]
+artifacts = []
+
 #############################
 # >>> Hatch Test Runner <<< #
 #############################
@@ -71,6 +71,13 @@ matrix-name-format = "{variable}-{value}"
 
 [[tool.hatch.envs.hatch-test.matrix]]
 python = ["3.10", "3.11", "3.12", "3.13"]
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+log_cli_level = "INFO"
+filterwarnings = "ignore::DeprecationWarning"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 
 ################################
 # >>> Hatch Python Scripts <<< #
@@ -102,18 +109,3 @@ line-length = 120
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md#sample-pyprojecttoml-file
 typeCheckingMode = "strict"
 pythonVersion = "3.11"
-
-[tool.pytest.ini_options]
-testpaths = "tests"
-log_cli_level = "INFO"
-filterwarnings = "ignore::DeprecationWarning"
-asyncio_mode = "auto"
-asyncio_default_fixture_loop_scope = "function"
-
-# -r Show extra test summary info as specified by chars:
-#   (s)kipped,
-#   (x)failed,
-#   (X)passed,
-# addopts = "-rsxX"
-
-# asyncio_mode = "auto"
