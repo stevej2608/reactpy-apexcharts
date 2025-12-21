@@ -10,12 +10,6 @@ const html = htm.bind(React.createElement);
 // When bundled, ChartModule.default is the exports object, which has a default property
 const Chart = ((ChartModule as any).default?.default || (ChartModule as any).default || ChartModule) as any;
 
-console.log("ChartModule:", ChartModule);
-console.log("ChartModule.default:", (ChartModule as any).default);
-console.log("ChartModule.default.default:", (ChartModule as any).default?.default);
-console.log("Chart (resolved):", Chart);
-console.log("Chart type:", typeof Chart);
-
 function format_wrapper(fmtString: string): (value: any) => any {
   const fmtFunc = new Function("value", fmtString);
 
@@ -95,8 +89,6 @@ export function RactpyApexCharts(props: ApexChartProps) {
   } catch (e) {
     console.log("YAxis formatter error %s", e);
   }
-
-  console.log('props %s', props)
 
   return <Chart {...props} />;
 }

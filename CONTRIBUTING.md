@@ -25,7 +25,7 @@ source code is in **./js/src/*.js**
 
 *Then:*
 
-    hatch test [--headed]
+    hatch test [--headed] [--update-snapshots]
 
 ## Publish 
 
