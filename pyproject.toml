@@ -22,16 +22,14 @@ license = "MIT"
 authors = [{ name = "Steve Jones", email = "jonesst2608@gmail.com" }]
 requires-python = ">=3.9"
 classifiers = [
-  "Programming Language :: Python :: 3.9",
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Operating System :: OS Independent",
-  "Intended Audience :: Developers",
-  "Topic :: Software Development :: Widget Sets",
-  "Topic :: Software Development :: User Interfaces",
-  "Environment :: Web Environment",
-  "Typing :: Typed",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = ["reactpy==2.0.0b4"]
 dynamic = ["version"]
@@ -61,27 +59,18 @@ installer = "uv"
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "asgi-tools",
-  "asgiref",
-  "faker>=24.3.0",
-  "fastapi>=0.109.0",
-  "orjson",
-  "pillow>=10.2.0",
-  "pixelmatch>=0.3.0",
-  "playwright==1.41.1",
-  "pytest-asyncio>=0.23.3",
-  "pytest-timeout==2.2.0",
-  "pytest>=7.4.4",
-  "servestatic",
-  "starlette>=0.13.6",
-  "trio>=0.24.0",
-  "uvicorn[standard]>=0.19.0",
+  "pytest-sugar",
+  "pytest-asyncio",
+  "responses",
+  "exceptiongroup",
+  "jsonpointer",
+  "starlette",
 ]
 randomize = true
 matrix-name-format = "{variable}-{value}"
 
 [[tool.hatch.envs.hatch-test.matrix]]
-python = ["3.11", "3.12"]
+python = ["3.10", "3.11", "3.12", "3.13"]
 
 ################################
 # >>> Hatch Python Scripts <<< #
