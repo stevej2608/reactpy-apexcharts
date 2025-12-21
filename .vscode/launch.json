@@ -5,15 +5,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Program (test.js)",
-      "program": "${workspaceFolder}/tmp/test.js",
-      "request": "launch",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "type": "node"
-    },
-    {
       "name": "1a examples/barchart_example.py",
       "type": "debugpy",
       "request": "launch",
@@ -21,6 +12,10 @@
       "justMyCode": false,
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "PYTHONPATH": "${cwd}/src",
+        // "REACTPY_DEBUG_MODE": "1"
+      },
       "serverReadyAction": {
         "pattern": "Uvicorn running on\\s+(https?://\\S+)",
         "uriFormat": "%s/",
@@ -37,7 +32,8 @@
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
-        "REACTPY_DEBUG_MODE": "1"
+        "PYTHONPATH": "${cwd}/src",
+        // "REACTPY_DEBUG_MODE": "1"
       },
       "serverReadyAction": {
         "pattern": "Uvicorn running on\\s+(https?://\\S+)",
@@ -72,12 +68,10 @@
       "stopOnEntry": false,
       "module": "pytest",
       "args": [
-        "--headed",
         "--update-snapshots",
         "tests/test_sales_example.py"
       ],
       "cwd": "${workspaceRoot}",
-      "env": {},
       "envFile": "${workspaceRoot}/.env",
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",

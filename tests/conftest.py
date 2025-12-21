@@ -1,34 +1,65 @@
 import pytest
-from playwright.async_api import async_playwright
+from _pytest.config import Config
+from _pytest.config.argparsing import Parser
+
 from reactpy.testing import DisplayFixture, BackendFixture
+from reactpy.testing.common import GITHUB_ACTIONS
+from reactpy._option import Option
 
 pytest_plugins = "tests.tooling.pytest_playwright_visual"
+
+REACTPY_TESTS_DEFAULT_TIMEOUT = Option(
+    "REACTPY_TESTS_DEFAULT_TIMEOUT",
+    10.0,
+    mutable=False,
+    validator=float,
+)
+"""A default timeout for testing utilities in ReactPy"""
+
 
 @pytest.fixture(scope="session")
 def anyio_backend():
     return 'asyncio'
 
-def pytest_addoption(parser) -> None:
+def pytest_addoption(parser: Parser) -> None:
     parser.addoption(
-        "--headed",
-        dest="headed",
+        "--headless",
+        dest="headless",
         action="store_true",
-        help="Open a browser window when runnging web-based tests",
+        help="Don't open a browser window when running web-based tests",
     )
 
-@pytest.fixture(scope="session")
-async def display(server, browser):
-    async with DisplayFixture(server, browser) as display:
+@pytest.fixture
+async def display(server, page):
+    async with DisplayFixture(server, page) as display:
         yield display
 
-
-@pytest.fixture(scope="session")
+@pytest.fixture
 async def server():
     async with BackendFixture() as server:
         yield server
 
 
-@pytest.fixture(scope="session")
-async def browser(pytestconfig):
+@pytest.fixture
+async def page(browser):
+    pg = await browser.new_page()
+    pg.set_default_timeout(REACTPY_TESTS_DEFAULT_TIMEOUT.current * 1000)
+    try:
+        yield pg
+    finally:
+        await pg.close()
+
+# @pytest.fixture(scope="session")
+# async def page(pytestconfig):
+#     async with async_playwright() as pw:
+#         yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))
+
+
+@pytest.fixture
+async def browser(pytestconfig: Config):
+    from playwright.async_api import async_playwright
+
     async with async_playwright() as pw:
-        yield await pw.chromium.launch(headless=not bool(pytestconfig.option.headed))
+        yield await pw.chromium.launch(
+            headless=bool(pytestconfig.option.headless) or GITHUB_ACTIONS
+        )
