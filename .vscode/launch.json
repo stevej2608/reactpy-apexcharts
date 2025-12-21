@@ -28,7 +28,6 @@
         "killOnServerStop": true
       }
     },
-
     {
       "name": "1b examples/sales_example.py",
       "type": "debugpy",
@@ -37,7 +36,9 @@
       "justMyCode": false,
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
-      "env": {"REACTPY_DEBUG_MODE": "1"},
+      "env": {
+        "REACTPY_DEBUG_MODE": "1"
+      },
       "serverReadyAction": {
         "pattern": "Uvicorn running on\\s+(https?://\\S+)",
         "uriFormat": "%s/",
@@ -49,6 +50,10 @@
       "name": "1c examples/syncing_chart.py",
       "type": "debugpy",
       "request": "launch",
+      "env": {
+        "PYTHONPATH": "${cwd}/src",
+        // "REACTPY_DEBUG_MODE": "1"
+      },
       "module": "examples.syncing_chart",
       "justMyCode": false,
       "console": "internalConsole",
@@ -60,7 +65,6 @@
         "killOnServerStop": true
       }
     },
-
     {
       "name": "2a. PyTest (test_sales_example.py)",
       "type": "debugpy",
@@ -79,9 +83,6 @@
       "internalConsoleOptions": "openOnSessionStart",
       "justMyCode": false
     },
-
-
-
     {
       "name": "3 Launch Chrome",
       "request": "launch",
@@ -91,14 +92,11 @@
       "sourceMaps": true,
       "internalConsoleOptions": "openOnSessionStart",
       "sourceMapPathOverrides": {
-
         // I've no idea why this works. The underscore or any other
         // charicter is vital for the breakpoint mapping to correctly.
         // TODO: Try and figure out why.
-
         "*": "${workspaceFolder}/_/*",
       }
     },
-
   ]
 }

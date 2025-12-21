@@ -5,7 +5,7 @@ requires = ["hatchling", "hatch-build-scripts"]
 [[tool.hatch.build.hooks.build-scripts.scripts]]
 commands = [
   "bun install --cwd src/js",
-  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm",
+  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm --no-minify",
 ]
 artifacts = []
 
