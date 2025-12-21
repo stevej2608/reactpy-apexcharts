@@ -1,5 +1,4 @@
 from typing import Literal, Union, List, Dict, Any, Optional
-from os import environ
 from pathlib import Path
 
 from reactpy.web.module import export, module_from_file
@@ -8,12 +7,12 @@ ChartType = Literal['line', 'area', 'bar', 'pie', 'donut', 'scatter', 'bubble', 
 
 
 _js_module = module_from_file(
-    "rectpy-apexcharts",
-    file=Path(__file__).parent/"bundle.dev.js" if environ.get("REACTPY_DEBUG_MODE") else Path(__file__).parent/"bundle.min.js" ,
+    "reactpy-apexcharts",
+    file=Path(__file__).parent / "static" / "bundle.js",
     fallback="⏳",
 )
 
-_RactpyApexCharts = export(_js_module, "RactpyApexCharts")
+_ReactpyApexCharts = export(_js_module, "RactpyApexCharts")
 
 
 Series = List[Dict[str, Any]]
@@ -79,4 +78,4 @@ def ApexChart(
     else:
         _args.pop('height')
 
-    return _RactpyApexCharts(_args)
+    return _ReactpyApexCharts(_args)

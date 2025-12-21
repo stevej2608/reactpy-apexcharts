@@ -1,6 +1,13 @@
 # --- JAVASCRIPT BUNDLES ---
 
 rectpy-apexcharts/bundle.js
+reactpy_apexcharts/bundle.dev.js
+reactpy_apexcharts/bundle.min.js
+
+# New build artifacts (bun)
+src/reactpy_apexcharts/static/bundle.js
+src/js/node_modules/
+src/js/bun.lockb
 
 # --- PYTHON IGNORE FILES ----
 

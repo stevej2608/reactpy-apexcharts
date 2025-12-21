@@ -1,6 +1,13 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-build-scripts"]
+
+[[tool.hatch.build.hooks.build-scripts.scripts]]
+commands = [
+  "bun install --cwd src/js",
+  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm",
+]
+artifacts = []
 
 ##############################
 # >>> Hatch Build Config <<< #
@@ -32,13 +39,15 @@ urls.Homepage = "https://github.com/stevej2608/reactpy-apexcharts"
 urls.Source = "https://github.com/stevej2608/reactpy-apexcharts"
 
 [tool.hatch.version]
-path = "reactpy_apexcharts/__init__.py"
+path = "src/reactpy_apexcharts/__init__.py"
 
 [tool.hatch.build.targets.sdist]
-include = ["/reactpy_apexcharts", "/tests", "/examples", "/README.md", "/LICENSE"]
+include = ["/src", "/tests", "/examples", "/utils"]
+artifacts = ["/src/reactpy_apexcharts/static/"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["reactpy_apexcharts"]
+packages = ["src/reactpy_apexcharts"]
+artifacts = ["/src/reactpy_apexcharts/static/"]
 
 [tool.hatch.metadata]
 license-files = { paths = ["LICENSE"] }
@@ -83,6 +92,13 @@ extra-dependencies = ["pyright"]
 
 [tool.hatch.envs.python.scripts]
 type_check = ["pyright reactpy_table"]
+
+[tool.hatch.envs.javascript]
+detached = true
+
+[tool.hatch.envs.javascript.scripts]
+check = ['bun install --cwd "src/js"', 'bun run --cwd "src/js" check']
+fix = ['bun install --cwd "src/js"', 'bun run --cwd "src/js" format']
 
 #########################
 # >>> Generic Tools <<< #

@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "format": "prettier --write .",
+    "check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "prettier": "^3.3.3"
+  },
+  "dependencies": {
+    "htm": "3.0.4",
+    "react": "17.0.1",
+    "react-apexcharts": "1.4.1",
+    "react-dom": "17.0.1"
+  }
+}
