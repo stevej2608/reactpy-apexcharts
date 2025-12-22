@@ -88,7 +88,7 @@ asyncio_default_fixture_loop_scope = "function"
 extra-dependencies = ["pyright"]
 
 [tool.hatch.envs.python.scripts]
-type_check = ["pyright reactpy_table"]
+type_check = ["pyright reactpy_apexcharts"]
 
 [tool.hatch.envs.javascript]
 detached = true
