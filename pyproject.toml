@@ -49,7 +49,7 @@ installer = "uv"
 [[tool.hatch.build.hooks.build-scripts.scripts]]
 commands = [
   "bun install --cwd src/js",
-  "bun build src/js/src/index.tsx --outfile src/reactpy_apexcharts/static/bundle.js --target=browser --format=esm --no-minify",
+  'bun build src/js/src/index.tsx --outdir src/reactpy_apexcharts/static --entry-naming bundle.js --target=browser --format=esm --minify --root=.',
 ]
 artifacts = []
 
@@ -64,7 +64,7 @@ extra-dependencies = [
   "exceptiongroup",
   "jsonpointer",
   "orjson",
-  "Pillow",
+  "pillow",
   "pixelmatch",
   "playwright",
   "pyright",
@@ -73,7 +73,7 @@ extra-dependencies = [
   "responses",
   "servestatic",
   "starlette",
-  "uvicorn[standard]",
+  "uvicorn[standard]"
 ]
 randomize = true
 matrix-name-format = "{variable}-{value}"
@@ -87,7 +87,6 @@ log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
-# addopts = "--headless"
 
 ################################
 # >>> Hatch Python Scripts <<< #
@@ -99,12 +98,33 @@ extra-dependencies = ["pyright"]
 [tool.hatch.envs.python.scripts]
 type_check = ["pyright reactpy_apexcharts"]
 
+#######################################
+# >>> Hatch Documentation Scripts <<< #
+#######################################
+
+[tool.hatch.envs.docs]
+template = "docs"
+dependencies = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocstrings[python]",
+  "black",  # Used by mkdocstrings for auto formatting
+]
+
+[tool.hatch.envs.docs.scripts]
+serve = ["cd docs && mkdocs serve"]
+build = ["cd docs && mkdocs build --strict"]
+
 [tool.hatch.envs.javascript]
 detached = true
 
 [tool.hatch.envs.javascript.scripts]
 check = ['bun install --cwd "src/js"', 'bun run --cwd "src/js" check']
 fix = ['bun install --cwd "src/js"', 'bun run --cwd "src/js" format']
+build-dev = [
+  'bun install --cwd "src/js"',
+  'bun build src/js/src/index.tsx --outdir src/reactpy_apexcharts/static --entry-naming bundle.js --target=browser --format=esm  --sourcemap=inline --minify --root=.',
+]
 
 #########################
 # >>> Generic Tools <<< #

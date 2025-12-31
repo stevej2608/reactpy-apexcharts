@@ -1,17 +1,22 @@
 {
+  "name": "reactpy-apexcharts",
+  "version": "0.1.0",
+  "description": "ApexCharts components for ReactPy",
+  "main": "src/index.tsx",
   "scripts": {
-    "format": "prettier --write .",
-    "check": "prettier --check ."
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.11",
-    "@types/react-dom": "^18.3.1",
-    "prettier": "^3.3.3"
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "htm": "3.0.4",
-    "react": "17.0.1",
+  	"htm": "3.0.4",
     "react-apexcharts": "1.4.1",
-    "react-dom": "17.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
   }
 }
