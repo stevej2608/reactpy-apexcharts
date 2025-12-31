@@ -59,13 +59,21 @@ artifacts = []
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
+  "asgi_tools",
+  "asgiref",
   "exceptiongroup",
   "jsonpointer",
+  "orjson",
+  "Pillow",
+  "pixelmatch",
+  "playwright",
   "pyright",
   "pytest-asyncio",
   "pytest-sugar",
   "responses",
+  "servestatic",
   "starlette",
+  "uvicorn[standard]",
 ]
 randomize = true
 matrix-name-format = "{variable}-{value}"
@@ -79,6 +87,7 @@ log_cli_level = "INFO"
 filterwarnings = "ignore::DeprecationWarning"
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
+# addopts = "--headless"
 
 ################################
 # >>> Hatch Python Scripts <<< #
