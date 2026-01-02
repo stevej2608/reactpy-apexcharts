@@ -1,0 +1,68 @@
+---
+nav:
+  - Get Started:
+      - Introduction: index.md
+  - About:
+      - Contributor Guide: about/contributing.md
+      - License: about/license.md
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/white-balance-sunny
+        name: Switch to light mode
+      primary: indigo
+      accent: indigo
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+      primary: indigo
+      accent: indigo
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - admonition
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: ["../"]
+          options:
+            show_root_heading: true
+            show_source: false
+
+extra:
+  generator: false
+
+site_name: ReactPy ApexCharts
+site_author: Steve Jones
+site_description: ApexCharts components for ReactPy
+repo_url: https://github.com/stevej2608/reactpy-apexcharts
+site_url: https://stevej2608.github.io/reactpy-apexcharts
+repo_name: ReactPy ApexCharts
+edit_uri: edit/main/docs/src/
+docs_dir: src

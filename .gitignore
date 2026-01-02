@@ -21,6 +21,10 @@ wheels/
 *.egg
 MANIFEST
 
+# --- DOCS ---
+
+docs/site
+
 # Virtual environments
 .venv/
 venv/
