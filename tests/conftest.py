@@ -32,8 +32,13 @@ def pytest_addoption(parser: Parser) -> None:
     )
 
 @pytest.fixture
-async def display(server: BackendFixture, page: Page) -> AsyncGenerator[DisplayFixture, None]:
-    async with DisplayFixture(server, page) as display:
+async def display(server: BackendFixture, browser: Browser, pytestconfig: Config) -> AsyncGenerator[DisplayFixture, None]:
+    async with DisplayFixture(
+        backend=server,
+        browser=browser,
+        headless=bool(pytestconfig.option.headless) or GITHUB_ACTIONS,
+        timeout=REACTPY_TESTS_DEFAULT_TIMEOUT.current
+    ) as display:
         yield display
 
 @pytest.fixture
