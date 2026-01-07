@@ -58,11 +58,11 @@ plugins:
 extra:
   generator: false
 
-site_name: ReactPy ApexCharts
+site_name: ReactPy Apexcharts
 site_author: Steve Jones
-site_description: ApexCharts components for ReactPy
+site_description: A ReactPy component package
 repo_url: https://github.com/stevej2608/reactpy-apexcharts
 site_url: https://stevej2608.github.io/reactpy-apexcharts
-repo_name: ReactPy ApexCharts
+repo_name: ReactPy Apexcharts
 edit_uri: edit/main/docs/src/
 docs_dir: src

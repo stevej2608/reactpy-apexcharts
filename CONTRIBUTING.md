@@ -1,38 +1,56 @@
+## Development Setup
+
+The cookiecutter creates a simple button component that can be used as a starting point 
+for your component development.
+
+```bash
+cd reactpy-apexcharts
+```
+Then run the tests. This will confirm the initial cookiecutter example works and 
+also setup the virtual environment for you to develop your code.
+
+    hatch test --headless
+
 ## Building
 
     hatch build --clean
 
+
+## VSCODE Support
+
+Running 'hatch test' creates the venv '.venv/hatch-test.py3.11'. The VSCODE settings.json
+is configured to use this env for development and debugging. You may need to run the
+VSCODE command **Developer: Reload Window** for the settings to take effect.
+
 ### Debugging
+
+Launch scripts are available to debug:
+
+- /examples/button_example.py
+- /tests/test_button.py 
 
 Python VSCODE launch configurations are provided for each of the 
 examples and for the pytest tests.
 
-Javascript VSCODE launch configuration is provided for debugging the
-browser code. For this to work the test application needs to be 
-started with the env variable **REACTPY_DEBUG_MODE** set prior to 
-running the application:
+Javascript VSCODE launch configuration is provided 
+for debugging the browser code. 
 
-    export REACTPY_DEBUG_MODE=1 
-    python -m examples.sales_example
+Build the development version of the browser code and run the 
+ReactPy example:
 
-Select the launch configuration **3. Launch Chrome**. You will
-now be able to set breakpoints from withing VSCODE. The javascript
-source code is in **./js/src/*.js**
+    hatch run javascript:build-dev && python -m examples.button_example
 
-## Testing
 
-    playwright install
+Then, select the launch configuration **3a. Launch Chrome**. You will
+now be able to set breakpoints from withing VSCODE.
 
-*Then:*
-
-    hatch test [--headless] [--update-snapshots]
 
 ## Publish 
 
     hatch build --clean
+
     hatch publish
 
 Or publish to local repo
 
-    hatch build --clean
     hatch publish -r pypicloud

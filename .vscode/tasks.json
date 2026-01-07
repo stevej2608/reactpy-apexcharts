@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "hatch run javascript:build-dev",
+      "type": "shell",
+      "command": "hatch",
+      "args": ["run", "javascript:build-dev"],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

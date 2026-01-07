@@ -24,7 +24,7 @@ def ApexChart(
         width: Optional[Union[str,int]] = None,
         height: Optional[Union[str,int]] = None,
         options: Optional[Dict[str, Any]] = None
-        ):
+        ) -> Any:
     """ Wrapper for react-apexcharts library. For API and examples see:
 
         https://github.com/apexcharts/react-apexcharts
@@ -37,7 +37,7 @@ def ApexChart(
         options (Dict[str, Any]): Options
 
     Returns:
-        _type_: _description_
+        A ReactPy component instance for rendering an ApexCharts chart
     """
 
     def unpack_option(option_name: str, value: Any, options: Optional[Dict[str, Any]]) -> Any:

@@ -6,7 +6,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-# dist/
+dist/
 downloads/
 eggs/
 .eggs/
@@ -22,7 +22,6 @@ wheels/
 MANIFEST
 
 # --- DOCS ---
-
 docs/site
 
 # Virtual environments

@@ -8,6 +8,8 @@ from reactpy.testing import DisplayFixture, BackendFixture
 from reactpy.testing.common import GITHUB_ACTIONS
 from reactpy._option import Option
 
+from tests.tooling.page_containers import IContainer, PicoContainer
+
 pytest_plugins = "tests.tooling.pytest_playwright_visual"
 
 REACTPY_TESTS_DEFAULT_TIMEOUT = Option(
@@ -32,19 +34,19 @@ def pytest_addoption(parser: Parser) -> None:
     )
 
 @pytest.fixture
-async def display(server: BackendFixture, browser: Browser, pytestconfig: Config) -> AsyncGenerator[DisplayFixture, None]:
-    async with DisplayFixture(
-        backend=server,
-        browser=browser,
-        headless=bool(pytestconfig.option.headless) or GITHUB_ACTIONS,
-        timeout=REACTPY_TESTS_DEFAULT_TIMEOUT.current
-    ) as display:
+async def display(server: BackendFixture, browser: Browser) -> AsyncGenerator[DisplayFixture, None]:
+    async with DisplayFixture(server, browser) as display:
         yield display
 
 @pytest.fixture
 async def server() -> AsyncGenerator[BackendFixture, None]:
     async with BackendFixture() as server:
         yield server
+
+
+@pytest.fixture
+async def container(display: DisplayFixture) -> IContainer:
+    return PicoContainer(display)
 
 
 @pytest.fixture

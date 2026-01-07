@@ -2,7 +2,7 @@ from reactpy import component, html
 from utils.logger import log, logging
 from reactpy_apexcharts import ApexChart
 
-from examples.runner import run
+from utils.pico_run import run
 
 # https://demo.themesberg.com/windster/
 

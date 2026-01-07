@@ -1,6 +1,6 @@
 # Contributor Guide
 
-Thank you for your interest in contributing to ReactPy ApexCharts!
+Thank you for your interest in contributing to ReactPy Apexcharts!
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ By utilizing `hatch`, the following commands are available to manage the develop
 | `hatch test` | Run Python tests using the current environment's Python version |
 | `hatch test --all` | Run tests using all compatible Python versions |
 | `hatch test --python 3.9` | Run tests using a specific Python version |
-| `hatch test -- -k test_sales_example` | Run only a specific test |
+| `hatch test -k test_navigate_with_link` | Run only a specific test |
 
 
 ### Type Checking
@@ -42,7 +42,7 @@ pyright
 
 ### Code Style
 
-This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and formatting (ruff is assumed to be installed globally).
+This project uses [Ruff](https://docs.astral.sh/ruff/) for linting and formatting.
 
 ```bash
 ruff check .

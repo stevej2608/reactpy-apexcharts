@@ -1,44 +1,44 @@
 """
-ReactPy v1 compatible run() and pico_run() functions for ReactPy v2
+ReactPy v2 compatible run() and pico_run() functions
 
-This module provides run() and pico_run() functions that mimic the ReactPy v1 behavior,
-making it easy to run simple examples without manual server setup.
+This module provides run() and pico_run() functions for running ReactPy components
+with automatic server setup, similar to ReactPy v1 behavior.
 """
 
 import sys
-from typing import Any, List, Optional, cast
+from typing import Any, List, Optional
 
 import uvicorn
 from reactpy import component, html
-from reactpy.types import ComponentConstructor, VdomDict, VdomChild
+from reactpy.types import RootComponentConstructor, VdomDict
 from reactpy.executors.asgi import ReactPy
 
 
 def run(
-    app_main: ComponentConstructor,
+    app_main: RootComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
-    title: str = "ReactPy App",
+    title: str = "ReactPy Forms",
     head: Optional[VdomDict] = None,
     **kwargs: Any,
 ) -> None:
     """Run a ReactPy component with automatic server setup.
 
-    This function reproduces the ReactPy v1 run() behavior by automatically
+    This function provides ReactPy v1-like run() behavior by automatically
     creating and configuring an ASGI server to run your ReactPy component.
 
     Args:
         app_main: A ReactPy component function decorated with @component
         host: Server host address (default: "127.0.0.1")
         port: Server port (default: 8000)
-        title: Page title (default: "ReactPy App")
+        title: Page title (default: "ReactPy Forms")
         head: Optional HTML head VdomDict element with additional head content
         **kwargs: Additional arguments passed to uvicorn.run()
 
     Example:
         ```python
         from reactpy import component, html
-        from examples.runner import run
+        from utils.pico_run import run
 
         @component
         def AppMain():
@@ -54,15 +54,13 @@ def run(
         head = html.head(html.title(title))
     elif "children" in head:
         # Add title to existing head if not present
-        children = cast(List[VdomChild], head.get("children", []))  # type: ignore[reportUnknownMemberType]
         has_title = any(
-            isinstance(child, dict) and child.get("tagName") == "title"  # type: ignore[reportUnknownMemberType]
-            for child in children
-        )  # type: ignore[reportUnknownArgumentType]
+            child.get("tagName") == "title"  # type: ignore
+            for child in head.get("children", [])  # type: ignore
+            if isinstance(child, dict)
+        )
         if not has_title:
-            # Cast to list to ensure we can insert
-            children_list = cast(List[VdomChild], head["children"])
-            children_list.insert(0, html.title(title))
+            head["children"].insert(0, html.title(title))  # type: ignore
     else:
         head["children"] = [html.title(title)]
 
@@ -85,10 +83,10 @@ def run(
 
 
 def pico_run(
-    app: ComponentConstructor,
+    app: RootComponentConstructor,
     host: str = "127.0.0.1",
     port: int = 8000,
-    title: str = "ReactPy Table",
+    title: str = "ReactPy Forms",
     additional_head: Optional[List[str]] = None,
     **kwargs: Any,
 ) -> None:
@@ -101,14 +99,14 @@ def pico_run(
         app: A ReactPy component function decorated with @component
         host: Server host address (default: "127.0.0.1")
         port: Server port (default: 8000)
-        title: Page title (default: "ReactPy Table")
+        title: Page title (default: "ReactPy Forms")
         additional_head: Optional list of CSS file paths to include
         **kwargs: Additional arguments passed to uvicorn.run()
 
     Example:
         ```python
         from reactpy import component, html
-        from examples.runner import pico_run
+        from utils.pico_run import pico_run
 
         @component
         def AppMain():
@@ -140,7 +138,7 @@ def pico_run(
     @component
     def PicoContainer():
         return html.div(
-            {'class': "container", 'style': {'max-width': '1900px'}},
+            {'class': "container"},
             html.section(app())
         )
 

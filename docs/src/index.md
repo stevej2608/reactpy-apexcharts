@@ -1,6 +1,6 @@
-# ReactPy ApexCharts
+# ReactPy Apexcharts
 
-ApexCharts components for ReactPy
+A ReactPy component package
 
 ## Install from PyPI
 
@@ -15,7 +15,7 @@ pip install reactpy-apexcharts
 Here's a quick example to get you started:
 
 ```python
-from reactpy_apexcharts import ApexChart
+from reactpy_apexcharts import ReactpyApexcharts
 
 # Your example code here
 ```
@@ -28,7 +28,7 @@ from reactpy_apexcharts import ApexChart
 
 ## Documentation
 
-This is the starter documentation for ReactPy ApexCharts. Expand this as your project grows!
+This is the starter documentation for ReactPy Apexcharts. Expand this as your project grows!
 
 ## API Reference
 

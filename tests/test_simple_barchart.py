@@ -6,5 +6,5 @@ from .tooling.wait_stable import wait_page_stable
 
 async def test_all_simple_barchart(display: DisplayFixture, assert_snapshot: Callable[..., None]) -> None:
     await display.show(AppMain)
-    await wait_page_stable(display.page)
+    await wait_page_stable(display.page, minimum_delay=1500)
     assert_snapshot(await display.page.screenshot())

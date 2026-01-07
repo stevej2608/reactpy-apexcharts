@@ -5,7 +5,7 @@ from reactpy import component, html
 from utils.logger import log, logging
 from reactpy_apexcharts import ApexChart
 
-from examples.runner import run
+from utils.pico_run import run
 
 DATE = dt(2017, 2, 11)
 
