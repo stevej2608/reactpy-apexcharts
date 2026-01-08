@@ -5,7 +5,7 @@ from reactpy import component, html
 from utils.logger import log, logging
 from reactpy_apexcharts import ApexChart
 
-from utils.pico_run import run
+from utils.app_runner import PicoRunner
 
 DATE = dt(2017, 2, 11)
 
@@ -65,4 +65,4 @@ def AppMain():
 
 if __name__ == "__main__":
     log.setLevel(logging.INFO)
-    run(AppMain)
+    PicoRunner.run(AppMain)
